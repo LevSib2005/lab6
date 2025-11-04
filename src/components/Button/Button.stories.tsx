@@ -4,40 +4,41 @@ import { action } from 'storybook/actions';
 import Button from './Button';
 
 const meta: Meta<typeof Button> = {
-    title: 'Components/Button',
+    title: 'UI/ClickButton',
     component: Button,
     tags: ['autodocs'],
     parameters: {
         docs: {
             description: {
-                component: 'Кнопка с вариантами стилей, размерами и состоянием disabled. Поддерживает типы button/submit/reset.',
+                component: 'Интерактивная кнопка с вариантами оформления, размерами и состояниями. Поддерживает все стандартные типы кнопок.',
             },
         },
+        layout: 'centered',
     },
     argTypes: {
         variant: {
             control: 'select',
             options: ['primary', 'secondary', 'danger'],
-            description: 'Вариант стиля кнопки',
+            description: 'Цветовая схема кнопки',
         },
         size: {
             control: 'select',
             options: ['sm', 'md', 'lg'],
-            description: 'Размер кнопки',
+            description: 'Габаритный размер',
         },
         disabled: {
             control: 'boolean',
-            description: 'Состояние disabled',
+            description: 'Блокировка взаимодействия',
         },
         type: {
             control: 'select',
             options: ['button', 'submit', 'reset'],
-            description: 'Тип кнопки',
+            description: 'HTML-тип элемента',
         },
-        onClick: { action: 'clicked' },
+        onClick: { action: 'button clicked' },
         children: {
             control: 'text',
-            description: 'Содержимое кнопки',
+            description: 'Текст на кнопке',
         },
     },
 };
@@ -46,57 +47,67 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {
+export const Main: Story = {
     args: {
         variant: 'primary',
         size: 'md',
-        children: 'Primary Button',
-        onClick: action('onClick'),
+        children: 'Подтвердить',
+        onClick: action('button clicked'),
     },
 };
 
-export const Secondary: Story = {
+export const Alternative: Story = {
     args: {
         variant: 'secondary',
         size: 'md',
-        children: 'Secondary Button',
-        onClick: action('onClick'),
+        children: 'Отмена',
+        onClick: action('button clicked'),
     },
 };
 
-export const Danger: Story = {
+export const Warning: Story = {
     args: {
         variant: 'danger',
         size: 'md',
-        children: 'Danger Button',
-        onClick: action('onClick'),
+        children: 'Удалить',
+        onClick: action('button clicked'),
     },
 };
 
-export const Disabled: Story = {
+export const Inactive: Story = {
     args: {
         variant: 'primary',
         size: 'md',
-        children: 'Disabled Button',
+        children: 'Неактивно',
         disabled: true,
-        onClick: action('onClick'),
+        onClick: action('button clicked'),
     },
 };
 
-export const Small: Story = {
+export const Compact: Story = {
     args: {
         variant: 'primary',
         size: 'sm',
-        children: 'Small Button',
-        onClick: action('onClick'),
+        children: 'Маленькая',
+        onClick: action('button clicked'),
     },
 };
 
-export const Large: Story = {
+export const Expanded: Story = {
     args: {
         variant: 'primary',
         size: 'lg',
-        children: 'Large Button',
-        onClick: action('onClick'),
+        children: 'Большая кнопка',
+        onClick: action('button clicked'),
+    },
+};
+
+export const SubmitAction: Story = {
+    args: {
+        variant: 'primary',
+        size: 'md',
+        children: 'Отправить форму',
+        type: 'submit',
+        onClick: action('button clicked'),
     },
 };

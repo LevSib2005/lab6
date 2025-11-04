@@ -4,47 +4,48 @@ import { action } from 'storybook/actions';
 import Input from './Input';
 
 const meta: Meta<typeof Input> = {
-    title: 'Components/Input',
+    title: 'UI/InputField',
     component: Input,
     tags: ['autodocs'],
     parameters: {
         docs: {
             description: {
-                component: 'Поле ввода с лейблом, ошибкой, хелпером и валидацией. Поддерживает типы text/password/email.',
+                component: 'Текстовое поле с поддержкой валидации, подсказками и различными состояниями. Используется для ввода пользовательских данных.',
             },
         },
+        layout: 'padded',
     },
     argTypes: {
         label: {
             control: 'text',
-            description: 'Лейбл поля',
+            description: 'Заголовок поля ввода',
         },
         error: {
             control: 'text',
-            description: 'Текст ошибки',
+            description: 'Сообщение об ошибке валидации',
         },
         helperText: {
             control: 'text',
-            description: 'Хелпер-текст',
+            description: 'Вспомогательный текст под полем',
         },
         required: {
             control: 'boolean',
-            description: 'Обязательное поле',
+            description: 'Обязательность заполнения',
         },
         placeholder: {
             control: 'text',
-            description: 'Плейсхолдер',
+            description: 'Текст-подсказка внутри поля',
         },
         value: {
             control: 'text',
-            description: 'Значение поля',
+            description: 'Текущее значение поля',
         },
         type: {
             control: 'select',
             options: ['text', 'password', 'email'],
-            description: 'Тип инпута',
+            description: 'Тип вводимых данных',
         },
-        onChange: { action: 'changed' },
+        onChange: { action: 'value changed' },
     },
 };
 
@@ -52,40 +53,50 @@ export default meta;
 
 type Story = StoryObj<typeof Input>;
 
-export const Default: Story = {
+export const Basic: Story = {
     args: {
-        label: 'Имя',
-        placeholder: 'Введите имя',
+        label: 'Фамилия и имя',
+        placeholder: 'Иванов Иван',
         value: '',
-        onChange: action('onChange'),
+        onChange: action('value changed'),
     },
 };
 
-export const WithError: Story = {
+export const ValidationError: Story = {
     args: {
-        label: 'Email',
-        error: 'Неверный email',
-        value: 'invalid',
-        onChange: action('onChange'),
+        label: 'Электронная почта',
+        error: 'Проверьте правильность email адреса',
+        value: 'invalid-email',
+        onChange: action('value changed'),
     },
 };
 
-export const WithHelper: Story = {
+export const HintText: Story = {
     args: {
-        label: 'Пароль',
-        helperText: 'Минимум 8 символов',
+        label: 'Создайте пароль',
+        helperText: 'Должен содержать цифры и специальные символы',
         type: 'password',
         value: '',
-        onChange: action('onChange'),
+        onChange: action('value changed'),
     },
 };
 
-export const Required: Story = {
+export const MandatoryField: Story = {
     args: {
-        label: 'Телефон',
+        label: 'Номер телефона',
         required: true,
-        placeholder: '+7 (XXX) XXX-XX-XX',
+        placeholder: '+7 (999) 999-99-99',
         value: '',
-        onChange: action('onChange'),
+        onChange: action('value changed'),
+    },
+};
+
+export const EmailInput: Story = {
+    args: {
+        label: 'Рабочая почта',
+        type: 'email',
+        placeholder: 'example@company.com',
+        value: '',
+        onChange: action('value changed'),
     },
 };
