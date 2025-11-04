@@ -19,6 +19,7 @@
     "build-lib": "rollup -c rollup.config.ts --configPlugin rollup-plugin-typescript2"
   },
   "dependencies": {
+    "@levsib2005/lab6": "^1.0.1",
     "@rollup/plugin-alias": "^6.0.0",
     "@types/jest": "^30.0.0",
     "identity-obj-proxy": "^3.0.0",
